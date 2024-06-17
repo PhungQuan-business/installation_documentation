@@ -1,5 +1,5 @@
 # install old docker versions and packages
-$ for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt-get remove $pkg; done
+for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt-get remove $pkg; done
 
 # Update existing packages
 sudo apt update
@@ -39,3 +39,13 @@ docker info
 # verfiy the Docker engine
 docker run hello-world
 
+# add the below block to .bashrc to ensure user is not deleted everytime logout the ssh connection
+block = "# Check if user added to Docker group\nif ! groups | grep -q '\\\bdocker\\\b'; then\n  exec newgr docker\nfi\n"
+
+# add the block to the end of .bashc file if it doesn't exist
+if ! grep -Fq "# Check if user added to Docker group" ~/.bashrc; then
+    printf "%b" "$block" >> ~/.bashrc
+    echo "Block added to .bashrc"
+else
+    echo "Block already exists in .bashrc"
+fi
