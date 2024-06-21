@@ -21,7 +21,7 @@ sudo apt-mark hold kubelet kubeadm kubectl
 
 # change the default cgroup to systemd
 sudo mkdir -p /etc/docker
-sudo tee /docker/daemon.json <<EOF
+sudo tee /etc/docker/daemon.json <<EOF
 {
   "exec-opts": ["native.cgroupdriver=systemd"],
   "log-driver": "json-file",
