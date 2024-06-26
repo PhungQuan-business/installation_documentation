@@ -76,6 +76,12 @@ You should see something like this
 
 ## K8s
 
+The setup include 1 Master node and 2 Worker node
+Recommended hardware requirement for each Master and Worker nodes are: \
+`CPU`: 2 cores \
+`RAM`: 4GB \
+`SSD`: 40GB
+
 ### Installing using shell script
 
 ```
