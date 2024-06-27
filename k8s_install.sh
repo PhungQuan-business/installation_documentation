@@ -13,21 +13,3 @@ echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.
 sudo apt-get update
 sudo apt-get install -y kubelet kubeadm kubectl
 sudo apt-mark hold kubelet kubeadm kubectl
-
-##### Từ đây trở xuống là phải viết thành docs##########
-
-# enable cri(container runtime interface)
-sudo vi /etc/containerd/config.toml
-# comment the only line and save
-sudo systemctl restart containerd
-
-# intialize the cluster on master node
-sudo kubeadm init --pod-network-cidr=192.168.0.0/16 --apiserver-advertise-address=<MASTER_IP>
-
-# for the master node only
-mkdir -p $HOME/.kube
-sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
-sudo chown $(id -u):$(id -g) $HOME/.kube/config
-
-# apply network plugin
-kubectl apply -f https://docs.projectcalico.org/v3.18/manifests/calico.yaml
