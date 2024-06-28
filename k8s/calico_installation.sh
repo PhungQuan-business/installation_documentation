@@ -1,8 +1,10 @@
-# Add the Calico helm repo
-helm repo add projectcalico https://docs.tigera.io/calico/charts
+# Install the operator on your cluster.
+kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.28.0/manifests/tigera-operator.yaml
 
-# Create the tigera-operator namespace.
-kubectl create namespace tigera-operator
+# Download the custom resources necessary to configure Calico.
+curl https://raw.githubusercontent.com/projectcalico/calico/v3.28.0/manifests/custom-resources.yaml -O
 
-# Install the Tigera Calico operator and custom resource definitions using the Helm chart
-helm install calico projectcalico/tigera-operator --version v3.28.0 --namespace tigera-operator
+# Create the manifest to install Calico.
+kubectl create -f custom-resources.yaml
+
+

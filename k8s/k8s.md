@@ -1,4 +1,4 @@
-## K8s
+# K8s
 
 The setup include 1 Master node and 2 Worker node
 Recommended hardware requirement for each Master and Worker nodes are: \
@@ -6,7 +6,18 @@ Recommended hardware requirement for each Master and Worker nodes are: \
 `RAM`: 4GB \
 `SSD`: 40GB
 
-### Installing using shell script
+## Setup on Master node
+
+### Create firewall rule for master
+
+```sh
+chmod +x master_firewall.sh
+
+# run the script
+./master_firewall.sh
+```
+
+### Install using shell script
 
 ```sh
 chmod +x k8s_install.sh
@@ -32,13 +43,15 @@ sudo vi /etc/containerd/config.toml
 sudo systemctl restart containerd
 ```
 
-### Initialize the cluster
+### Initialize Cluster
 
 ```sh
-sudo kubeadm init --pod-network-cidr=192.168.0.0/16 --apiserver-advertise-address=<MASTER_IP>
+sudo kubeadm init --pod-network-cidr=192.168.0.0/16 --apiserver-advertise-address=<MASTER-IP>
 ```
 
-The Master_IP refer to the internal IP of the server, use `ip route show` to view.
+The Master-IP refer to the internal IP of the server, use `ip route show` to view.
+
+Once finished initialize save the output for later join with the Worker Node
 
 ### Create directory for the cluster(for the Master Node)
 
@@ -47,8 +60,6 @@ mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
-
-Once finished initialize save the output for later join with the Worker Node
 
 ### Install CNI plugin(we use Calico)
 
@@ -59,9 +70,18 @@ chmod +x calico_installation.sh
 ./calico_installation.sh
 ```
 
-### Setup on Worker Node
+## Setup on Worker Node
 
-Repeat Step1 [Install using script](#install-using-shell-script) and Step2 [Enable CNI](#enable-cnicontainer-network-interface) on every Worker Node
+### Setup firewall rule for Worker node
+
+```sh
+chmod +x worker_firewall.sh
+
+# run the script
+./worker_firewall.sh
+```
+
+Repeat Step1 [Install using script](#installing-using-shell-script) and Step2 [Enable CNI](#enable-cnicontainer-network-interface) on every Worker Node
 
 ### Join the Worker Node to the cluster
 
@@ -79,7 +99,6 @@ On the Master node, run:
 `kubectl get nodes` and you should see something like this:
 ![alt text](./images/image.png)
 
-###
 
 ## References
 
