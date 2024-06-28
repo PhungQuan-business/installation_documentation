@@ -75,7 +75,7 @@ free -h
 #### Check if default cgroup is systemd
 
 ```sh
-sudo docker info | grep -i cgroups
+sudo docker info | grep -i cgroup
 ```
 
 You should see something like this
