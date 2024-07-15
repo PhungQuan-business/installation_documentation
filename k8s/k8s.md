@@ -33,7 +33,7 @@ chmod +x helm_installation.sh
 ./helm_installation.sh
 ```
 
-### Enable CNI(Container Network Interface)
+### Enable CRI(Container Runtime Interface)
 
 ```sh
 # comment the only line in the file
@@ -98,7 +98,6 @@ Copy and run the whole thing on every Worker Node
 On the Master node, run:
 `kubectl get nodes` and you should see something like this:
 ![alt text](./images/image.png)
-
 
 ## References
 
