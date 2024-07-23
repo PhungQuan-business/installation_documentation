@@ -1,0 +1,19 @@
+#!/bin/bash
+#hub-db-dir-pv.yaml
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: hub-db-dir-pv
+  labels:
+    type: local
+spec:
+  storageClassName: hostpath # trùng với name trong storageClass.yaml
+  capacity:
+    storage: 50Gi 
+  volumeMode: Filesystem # Là lưu Local
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain  # Or Delete, Recycle based on your preference
+  hostPath:
+    path: /mnt/data/jupyterhub  # đảm bảo là đường dẫn này đều có trên tất cả các node

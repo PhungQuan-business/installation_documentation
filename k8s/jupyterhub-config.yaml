@@ -1,0 +1,53 @@
+singleuser:
+  storage:
+    type: static
+    static:
+      pvcName: hub-db-dir
+      subPath: "{username}"
+    capacity: 50Gi
+    homeMountPath: /home/aircadm
+
+hub:
+  config:
+    JupyterHub:
+      admin_access: true
+      authenticator_class: dummy
+    KubeSpawner:
+      start_timeout: 100
+      http_timeout: 100
+      profile_list:
+        - display_name: "Tensorflow environment (GPU required)"
+          description: "Jupyter Notebooks that includes TensorFlow, Python, and essential libraries for machine learning and deep learning development."
+          kubespawner_override:
+            image: "quay.io/jupyter/tensorflow-notebook:cuda-996fae1248fc"
+            extra_resource_guarantees:
+              nvidia.com/gpu: "1"
+            extra_resource_limits:
+              nvidia.com/gpu: "1"
+            cpu_limit: 8
+            mem_limit: "18G"
+        - display_name: "Pytorch and Tensorflow environment (GPU required)"
+          description: "Power of your NVIDIA GPU and GPU calculations using Tensorflow and Pytorch in collaborative notebooks."
+          kubespawner_override:
+            image: "cschranz/gpu-jupyter:v1.7_cuda-12.3_ubuntu-22.04"
+            extra_resource_guarantees:
+              nvidia.com/gpu: "1"
+            extra_resource_limits:
+              nvidia.com/gpu: "1"
+            cpu_limit: 8
+            mem_limit: "18G"
+
+  db:
+    type: sqlite-pvc
+    upgrade:
+    pvc:
+      annotations: {}
+      selector: {}
+      accessModes:
+        - ReadWriteOnce
+      storage: 50Gi
+      subPath:
+      storageClassName: hostpath
+
+debug:
+  enabled: true

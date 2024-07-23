@@ -1,0 +1,32 @@
+singleuser:
+  storage:
+    type: static # có 2 mode: static và dynamic
+    static:
+      pvcName: hub-db-dir # tên của PVC
+      subPath: "{username}"
+    capacity: 50Gi
+    homeMountPath: /home/aircadm # thư mục Jupyterhub sẽ lưu dữ liệu
+hub:
+  config:
+    JupyterHub:
+      admin_access: true
+      authenticator_class: dummy
+    KubeSpawner:
+      start_timeout: 100
+      http_timeout: 100
+    Spawner:
+      args: ['--allow-root'] # cấp quyền cho Spawner
+  db:
+    type: sqlite-pvc # có thể chọn database khác
+    upgrade:
+    pvc:
+      annotations: {}
+      selector: {}
+      accessModes:
+        - ReadWriteOnce # có nhiều kiểu accessMode khác
+      storage: 50Gi
+      subPath:
+      storageClassName: hostpath
+
+debug:
+  enabled: true

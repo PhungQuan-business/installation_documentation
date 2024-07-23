@@ -19,7 +19,7 @@ retry() {
     done
 }
 
-# Install old Docker versions and packages
+# Uninstall old Docker versions and packages
 for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do
     sudo apt-get remove -y $pkg
 done
