@@ -11,9 +11,8 @@ Recommended hardware requirement for each Master and Worker nodes are: \
 ### Create firewall rule for master
 
 ```sh
+# for Master node
 chmod +x master_firewall.sh
-
-# run the script
 ./master_firewall.sh
 ```
 
@@ -28,8 +27,6 @@ chmod +x k8s_install.sh
 
 ```sh
 chmod +x helm_installation.sh
-
-# run the script
 ./helm_installation.sh
 ```
 
@@ -75,9 +72,8 @@ chmod +x calico_installation.sh
 ### Setup firewall rule for Worker node
 
 ```sh
+# for Worker node
 chmod +x worker_firewall.sh
-
-# run the script
 ./worker_firewall.sh
 ```
 
@@ -88,7 +84,7 @@ Repeat Step1 [Install using script](#installing-using-shell-script) and Step2 [E
 Assume this is the join token you get after initializing the cluster
 
 ```sh
-kubeadm join 10.128.0.7:6443 --token 5ngv5u.faso7ed9s8gxxxxx --discovery-token-ca-cert-hash sha256:a114ae227988bc82aac8abae7c2ee932584dfcca295577aeb0212d6c3xxxxxxx
+sudo kubeadm join 10.128.0.7:6443 --token 5ngv5u.faso7ed9s8gxxxxx --discovery-token-ca-cert-hash sha256:a114ae227988bc82aac8abae7c2ee932584dfcca295577aeb0212d6c3xxxxxxx
 ```
 
 Copy and run the whole thing on every Worker Node

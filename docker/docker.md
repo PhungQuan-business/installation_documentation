@@ -2,6 +2,17 @@
 
 The installation process mostly refer to this [Docker installtion]
 
+### Clone the repo
+
+```sh
+git clone https://github.com/PhungQuan-business/installation_documentation.git
+```
+
+```sh
+# change to the docker directory
+cd docker
+```
+
 ### Install Docker using shell script
 
 ```sh
