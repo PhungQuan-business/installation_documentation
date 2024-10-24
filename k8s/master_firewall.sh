@@ -1,3 +1,5 @@
+sudo ufw allow 22 # http connection
+sudo ufw allow 443 # https connection
 sudo ufw allow 6443/tcp  # Kubernetes API server
 sudo ufw allow 2379:2380/tcp  # etcd server client API
 sudo ufw allow 10250/tcp  # Kubelet API

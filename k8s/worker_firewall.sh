@@ -1,3 +1,5 @@
+sudo ufw allow 22 # http connection
+sudo ufw allow 443 # https connection
 sudo ufw allow 179/tcp # Calico networking(BGP)
 sudo ufw allow 4789/tcp # Calico VXLAN
 sudo ufw allow 5473/tcp # Calico with typha
